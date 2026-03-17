@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prof. Hao Tang | University of Ottawa</title>
+  <meta name="description" content="Personal academic website of Prof. Hao Tang, Assistant Professor at the University of Ottawa." />
+  <style>
+    :root {
+      --primary: #8b0015;
+      --primary-dark: #5f0010;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --max-width: 1100px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 56px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-card,
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 38px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #fff2f3;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 10px;
+      color: var(--primary-dark);
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-text {
+      font-size: 1.02rem;
+      margin-bottom: 22px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid var(--primary);
+      transition: all 0.2s ease;
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn.secondary:hover {
+      background: #fff5f5;
+      text-decoration: none;
+    }
+
+    .profile-card {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .profile-photo {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, #ddd, #f3f4f6);
+      display: block;
+    }
+
+    .profile-name {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .profile-role {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .profile-meta {
+      font-size: 0.96rem;
+      color: var(--text);
+      margin: 6px 0;
+    }
+
+    main section {
+      padding: 18px 0 8px;
+    }
+
+    .section-title {
+      margin-bottom: 18px;
+      font-size: 1.9rem;
+      color: var(--primary-dark);
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .research-grid,
+    .teaching-grid,
+    .people-grid,
+    .news-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .item-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff;
+    }
+
+    .item-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    ul.clean {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .pub-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .pub-item {
+      border-left: 4px solid var(--primary);
+      background: #fff;
+      border-radius: 0 14px 14px 0;
+      padding: 18px 18px 18px 20px;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary-dark);
+    }
+
+    footer {
+      margin-top: 42px;
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .small-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-2,
+      .research-grid,
+      .teaching-grid,
+      .people-grid,
+      .news-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .profile-photo {
+        width: 180px;
+        height: 180px;
+      }
+
+      .hero-card,
+      .section-card,
+      .profile-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Prof. Hao Tang</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#people">People</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="about">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">Assistant Professor | University of Ottawa</div>
+        <h1>Hao Tang</h1>
+        <div class="subtitle">Combustion and propulsion, gas turbines, laser diagnostics, low-carbon fuels, and turbulence</div>
+        <p class="hero-text">
+          Welcome to my academic group website. My research focuses on advanced laser diagnostics and sustainable combustion systems, with an emphasis on low carbon fuels, turbulence, emissions, and next-generation gas turbines for power generation and propulsion.
+        </p>
+        <p class="hero-text">
+          Our work combines experiments, laser-based measurements, combustion physics, and data analysis to improve flame stability, understand turbulence-chemistry interaction, and support cleaner and more efficient energy technologies.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#research">View Research</a>
+          <a class="btn secondary" href="#contact">Join the Lab</a>
+        </div>
+        <p class="small-note">
+          Replace this text with your own short biography, research statement, and current opportunities for students or postdocs.
+        </p>
+      </div>
+
+      <div class="hero-card profile-card">
+        <img class="profile-photo" src="your-photo.jpg" alt="Portrait of Prof. Hao Tang" />
+        <div class="profile-name">Prof. Hao Tang</div>
+        <div class="profile-role">Assistant Professor<br />Department of Mechanical Engineering<br />University of Ottawa</div>
+        <div class="profile-meta"><strong>Email:</strong> htang2@uottawa.ca</div>
+        <div class="profile-meta"><strong>Office:</strong> Colonel By Hall, A219, Ottawa, Canada</div>
+        <div class="profile-meta"><strong>Links:</strong> <a href="https://scholar.google.ca/citations?user=q48_QOcAAAAJ&hl=en">Google Scholar</a> | <a href="https://orcid.org/0000-0001-8415-8072">ORCID</a> | <a href="https://ca.linkedin.com/in/hao-tang-1726b5170">LinkedIn</a></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+ <section id="research">
+  <h2 class="section-title">Research</h2>
+  <div class="section-card">
+    <div class="research-grid">
+      <div class="item-card">
+        <img
+          src="research-1.jpg"
+          alt="Advanced laser diagnostics"
+          style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 14px;"
+        />
+        <h3>Advanced laser diagnostics</h3>
+        <p>Development and application of Raman, Rayleigh, PLIF, and related diagnostics for temperature and species measurements in turbulent reacting flows.</p>
+      </div>
+
+      <div class="item-card">
+        <img
+          src="research-2.jpg"
+          alt="Low-carbon fuels"
+          style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 14px;"
+        />
+        <h3>Low-Carbon Fuels</h3>
+        <p>Fundamental and applied studies of ammonia, hydrogen, methane, and fuel blends for cleaner combustion and emissions reduction.</p>
+      </div>
+
+      <div class="item-card">
+        <img
+          src="research-3.jpg"
+          alt="Turbulence-chemistry interaction"
+          style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 14px;"
+        />
+        <h3>Turbulence-Chemistry Interaction</h3>
+        <p>Investigation of how mixing, strain, and compositional inhomogeneity affect flame stabilization, flame length, and pollutant formation.</p>
+      </div>
+
+      <div class="item-card">
+        <img
+          src="research-4.jpg"
+          alt="Gas-turbine combustion"
+          style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 14px;"
+        />
+        <h3>Gas-Turbine Combustion</h3>
+        <p>Research on combustor-relevant flames, staged combustion, non-premixed and partially premixed systems, and pathways toward practical low-emission operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="publications">
+      <h2 class="section-title">Selected Publications</h2>
+      <div class="section-card">
+        <div class="pub-list">
+          <div class="pub-item">
+            <div class="pub-title">Raman spectroscopy for quantitative measurements of temperature and major species in high-pressure non-premixed NH3/H2/N2 counterflow flames</div>
+            <div>H Tang, C Yang, G Wang, TF Guiberti, G Magnotti</div>
+            <div class="muted">Combustion and flame, 2022</div>
+            <div><a href="#">Paper</a> | <a href="tps://doi.org/10.1016/j.combustflame.2021.111840">DOI</a></div>
+          </div>
+          <div class="pub-item">
+            <div class="pub-title">	
+[HTML] from sciencedirect.com
+Omni@uOttawa
+Scalar structure in turbulent non-premixed NH3/H2/N2 jet flames at elevated pressure using Raman spectroscopy</div>
+            <div>H Tang, C Yang, G Wang, Y Krishna, TF Guiberti, WL Roberts, G Magnotti</div>
+            <div class="muted">Combustion and flame, 2022</div>
+            <div><a href="#">Paper</a> | <a href="https://doi.org/10.1016/j.combustflame.2022.112292">DOI</a></div>
+          </div>
+          <div class="pub-item">
+            <div class="pub-title">Simultaneous NH/NO PLIF measurements in plasma-assisted ammonia and ammonia/hydrogen swirling flames</div>
+            <div>H Tang, E Chatziandreou, G Rahn, B Peng, W Sun</div>
+            <div class="muted">Proceedings of the Combustion Institute, 2025</div>
+            <div><a href="#">Paper</a> | <a href="https://doi.org/10.1016/j.proci.2025.105789">DOI</a></div>
+          </div>
+        </div>
+        <p class="small-note">You can duplicate these publication blocks and add all your papers, or simply link this section to your Google Scholar profile.</p>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <h2 class="section-title">Teaching</h2>
+      <div class="section-card">
+        <div class="teaching-grid">
+          <div class="item-card">
+            <h3>Courses Taught</h3>
+            <ul class="clean">
+              <li>Aerodynamics</li>
+              <li>Combustion</li>
+              <li>Fluid Mechanics</li>
+              <li>Propulsion</li>
+            </ul>
+          </div>
+          <div class="item-card">
+            <h3>Teaching Interests</h3>
+            <ul class="clean">
+              <li>Combustion and reacting flows</li>
+              <li>Thermodynamics</li>
+              <li>Optical and laser diagnostics</li>
+              <li>Energy systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="people">
+      <h2 class="section-title">People and Opportunities</h2>
+      <div class="section-card">
+        <div class="people-grid">
+          <div class="item-card">
+            <h3>Current Group</h3>
+            <p>Current PhD students, MSc students, undergraduate researchers, postdocs, and collaborators.</p>
+          </div>
+          <div class="item-card">
+            <h3>Open Positions</h3>
+            <p>I am looking for motivated students interested in combustion, diagnostics, low-carbon fuels, and turbulent reacting flows. Please email your CV, transcripts, and a brief description of your research interests.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2 class="section-title">News</h2>
+      <div class="section-card">
+        <div class="news-grid">
+          <div class="item-card">
+            <h3>March 2026</h3>
+            <p>Started as Assistant Professor at the University of Ottawa.</p>
+          </div>
+          <div class="item-card">
+            <h3>Recent Update</h3>
+            <p>Two papers got accepted by ISOC 2026, held in Japan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-card">
+        <div class="contact-grid">
+          <div class="item-card contact-item">
+            <strong>Email</strong>
+            <a href="mailto:your.email@uottawa.ca">htang2@uottawa.ca</a>
+          </div>
+          <div class="item-card contact-item">
+            <strong>Office</strong>
+            Department of Mechanical Engineering<br />University of Ottawa<br />CBY 219
+          </div>
+          <div class="item-card contact-item">
+            <strong>Prospective Students</strong>
+            Please include your CV, transcripts, and research interests in your email.
+          </div>
+          <div class="item-card contact-item">
+            <strong>Profiles</strong>
+            <a href="#">Google Scholar</a><br />
+            <a href="#">ORCID</a><br />
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Hao Tang. All rights reserved.<br />
+      Built as a simple single-file academic website template.
+    </div>
+  </footer>
+</body>
+</html>
